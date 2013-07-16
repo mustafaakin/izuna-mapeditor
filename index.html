@@ -9,6 +9,8 @@
 			#drawArea{
 				border: 1px #000 solid;
 				margin: 20px;
+				height: 460px;
+				width: 740px;
 			}
 			.selectedShip {
 				border: 1px #900 dashed;
@@ -27,7 +29,7 @@
 						<div class="span12">
 								<h1>Izuna map editor</h1>
 								<hr>
-								<img class="shipSelect" src="img/ship_a1.png" />
+								<img class="shipSelect selectedShip" src="img/ship_a1.png" />
 								<img class="shipSelect" src="img/ship_a2.png" />
 								<img class="shipSelect" src="img/ship_a3.png" />
 								<img class="shipSelect" src="img/ship_b1.png" />
@@ -59,17 +61,17 @@
 									<th>Y</th>
 								</tr>
 								<tr>
-									<th>Start</th>
+									<th>Start<a class="btn btn-mini" id="chooseStart">x</a></th>
 									<td><input class="input input-mini" type="text" id="startX" /></td>
 									<td><input class="input input-mini" type="text" id="startY" /></td>
 								</tr>
 								<tr>
-									<th>End</th>
+									<th>End<a class="btn btn-mini" id="chooseEnd">x</a></th>
 									<td><input class="input input-mini" type="text" id="endX" /></td>
 									<td><input class="input input-mini" type="text" id="endY" /></td>
 								</tr>
 								<tr>
-									<th>Mid</th>
+									<th>Mid<a class="btn btn-mini" id="chooseMid">x</a></th>
 									<td><input class="input input-mini" type="text" id="midX" /></td>
 									<td><input class="input input-mini" type="text" id="midY" /></td>
 								</tr>								
@@ -82,7 +84,7 @@
 					</div>			
 				</div>
 				<div class="span6">
-					<canvas id="drawArea" scale="2"></canvas>
+					<canvas id="drawArea"></canvas>
 				</div>
 			</div>
 		</div>
