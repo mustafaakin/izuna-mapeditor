@@ -12,6 +12,15 @@ import org.simpleframework.xml.Root;
  */
 @Root(name = "Enemy")
 public class WaveEnemy {
+
+	public void setPaths(List<WavePath> paths) {
+		Paths = paths;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
 	@Attribute
 	private String key;
 	@ElementList

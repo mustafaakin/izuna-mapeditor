@@ -10,6 +10,37 @@ import org.simpleframework.xml.Root;
  */
 @Root(name = "Path")
 public class WavePath {
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public void setEndX(int endX) {
+		this.endX = endX;
+	}
+
+	public void setEndY(int endY) {
+		this.endY = endY;
+	}
+
+	public void setMidX(int midX) {
+		this.midX = midX;
+	}
+
+	public void setMidY(int midY) {
+		this.midY = midY;
+	}
+
+	public void setStartX(int startX) {
+		this.startX = startX;
+	}
+
+	public void setStartY(int startY) {
+		this.startY = startY;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	@Element
 	private int duration;

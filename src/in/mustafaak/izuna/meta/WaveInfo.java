@@ -22,4 +22,8 @@ public class WaveInfo {
 	public List<WaveEnemy> getEnemies() {
 		return Enemies;
 	}
+	
+	public void setEnemies(List<WaveEnemy> enemies) {
+		Enemies = enemies;
+	}
 }
