@@ -5,6 +5,9 @@ import in.mustafaak.izuna.meta.WaveInfo;
 import in.mustafaak.izuna.meta.WavePath;
 
 import java.io.File;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,8 +28,22 @@ public class Shell {
 		// CS-101
 		return Integer.parseInt(str);
 	}
-
-	public static void main(String[] args) {
+	
+	public static void StreamWave(WaveInfo waveInfo){
+	    try {
+	    	Socket socket = new Socket();
+	    	socket.connect(new InetSocketAddress("192.168.1.102", 5000), 50000);
+			Persister serializer = new Persister();
+	    	OutputStream os = socket.getOutputStream();
+	    	serializer.write(waveInfo, os);
+	    	os.flush();
+	    } catch ( Exception e){
+	    	e.printStackTrace();
+	    }
+	}
+	
+	
+	public static void main(String[] args) {		
 		Scanner scan = new Scanner(System.in);
 		WaveInfo waveInfo = new WaveInfo();
 
@@ -51,6 +68,13 @@ public class Shell {
 				if (pathType.equals("x")) {
 					break;
 				}
+				if ( pathType.equals("d")){
+					pathType = scan.next();
+				}
+				if (pathType.equals("c")){
+					for(int i = 0; i < 9; i++, scan.next());
+					break;
+				}
 
 				p("Start X: ");
 				path.setStartX(i(scan.next()));
@@ -62,12 +86,10 @@ public class Shell {
 				p("End Y: ");
 				path.setEndY(i(scan.next()));
 
-				if (pathType.equals("q")) {
-					p("Mid X: ");
-					path.setMidX(i(scan.next()));
-					p("Mid Y: ");
-					path.setMidY(i(scan.next()));
-				}
+				p("Mid X: ");
+				path.setMidX(i(scan.next()));
+				p("Mid Y: ");
+				path.setMidY(i(scan.next()));
 
 				p("Loop? y/n" );
 				if (scan.next().equals("y")) {
@@ -87,21 +109,25 @@ public class Shell {
 				p("Duration: ");
 				int duration = i(scan.next());
 
+				pl("");
+
 				path.setDuration(duration);
 				paths.add(path);
 			}
-
 			enemy.setPaths(paths);
 			enemies.add(enemy);
 		}
 		waveInfo.setEnemies(enemies);
 		
+		p("Name for wave: ");
 		Persister serializer = new Persister();
-	    File result = new File("wave_" + System.currentTimeMillis() + ".xml");
+	    File result = new File("wave_" + scan.next() + ".xml");
 	    try {
 			serializer.write(waveInfo, result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	    
+
 	}
 }
