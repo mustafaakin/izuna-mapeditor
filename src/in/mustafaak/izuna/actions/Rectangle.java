@@ -25,7 +25,6 @@ public class Rectangle extends Action {
 
 	@Override
 	public ArrayList<WavePath> getPath(WavePath prev) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

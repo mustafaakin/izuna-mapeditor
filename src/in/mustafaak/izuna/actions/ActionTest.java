@@ -12,41 +12,49 @@ import java.util.ArrayList;
 import org.simpleframework.xml.core.Persister;
 
 public class ActionTest {
-	public static void main(String[] args){
-		Action a1 = new Start(-100,-100);
-		Action a2 = new Move(300,300,1000);
-		Action a3 = new Loop();
-		Action a4 = new Rectangle(400, 200, true, 1000);
-		Action a5 = new Move(0,200, 500);
-		Action a6 = new Rectangle(200, 400, false, 1000);
-		
-		ArrayList<WavePath> wavePath = Action.construct(null, a1,a2,a3,a4,a5,a6);
-		
+	public static void main(String[] args) {
 		WaveInfo waveInfo = new WaveInfo();
 		ArrayList<WaveEnemy> waveEnemies = new ArrayList<WaveEnemy>();
-		waveInfo.setEnemies(waveEnemies);
-		
-		WaveEnemy waveEnemy = new WaveEnemy();
-		waveEnemy.setKey("a1");
-		waveEnemy.setPaths(wavePath);
-		waveEnemies.add(waveEnemy);
-		
+
+		for (int i = 0; i < 20; i++) {
+			Action a1 = new Start(-100, -100);
+			int delay = 100;
+			int x = 400;
+			int y = 400;
+			int spacing = 100;
+			int xmax = 500;
+			int ymax = 100;
+			int r = 200;
+			int duration = 1000;
+			//Action a3 = new Invade(i, delay, x, y, spacing, xmax, ymax, r, duration);
+			int duration2 = 2000;
+			Action a3 = new CircularInvade(i, delay, x,y,r, duration, duration2);
+			ArrayList<WavePath> wavePath = Action.construct(null, a1, a3);
+
+			waveInfo.setEnemies(waveEnemies);
+
+			WaveEnemy waveEnemy = new WaveEnemy();
+			waveEnemy.setKey("a1");
+			waveEnemy.setPaths(wavePath);
+			waveEnemies.add(waveEnemy);
+
+		}
+
 		streamWave(waveInfo);
-		
+
 	}
-	
-	
-	public static void streamWave(WaveInfo waveInfo){
-	    try {
-	    	Socket socket = new Socket();
-	    	socket.connect(new InetSocketAddress("192.168.1.102", 5000), 50000);
+
+	public static void streamWave(WaveInfo waveInfo) {
+		try {
+			Socket socket = new Socket();
+			socket.connect(new InetSocketAddress("192.168.1.102", 5000), 50000);
 			Persister serializer = new Persister();
-	    	OutputStream os = socket.getOutputStream();
-	    	serializer.write(waveInfo, os);
-	    	serializer.write(waveInfo, System.out);
-	    	os.flush();
-	    } catch ( Exception e){
-	    	e.printStackTrace();
-	    }
+			OutputStream os = socket.getOutputStream();
+			serializer.write(waveInfo, os);
+			serializer.write(waveInfo, System.out);
+			os.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
