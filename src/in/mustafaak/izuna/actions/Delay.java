@@ -19,7 +19,7 @@ public class Delay extends Action {
 		w.setStartX(prev.getEndX() - 1);
 		w.setStartY(prev.getEndY() - 1);
 		w.setType("linear");
-		w.setEndX(prev.getEndX() - 1);
+		w.setEndX(prev.getEndX());
 		w.setEndY(prev.getEndY());
 
 		w.setDuration(duration);

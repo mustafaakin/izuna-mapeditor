@@ -1,9 +1,11 @@
 package in.mustafaak.izuna.actions;
 
+import in.mustafaak.izuna.meta.WaveEnemy;
 import in.mustafaak.izuna.meta.WaveInfo;
 import in.mustafaak.izuna.meta.WavePath;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Action {
 	public int endX;
@@ -38,5 +40,16 @@ public abstract class Action {
 		}
 
 		return paths;
+	}
+
+	public static void wiggle(WaveInfo waveInfo, int dx, int dy, int duration) {
+		for (WaveEnemy w : waveInfo.getEnemies()) {
+			List<WavePath> p = w.getPaths();
+			Loop loop = new Loop();
+			Move move1 = new Move(dx, dy, duration / 2);
+			Move move2 = new Move(-dx, -dy, duration / 2);
+			List<WavePath> d = Action.construct(p.get(p.size() - 1), loop, move1, move2);
+			p.addAll(d);
+		}
 	}
 }
