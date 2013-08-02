@@ -50,4 +50,20 @@ public class LevelInfo {
 		return Waves;
 	}
 
+	public void setName(String name) {
+		Name = name;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
+
+	public void setPassword(String password) {
+		Password = password;
+	}
+
+	public void setWaves(List<WaveInfo> waves) {
+		Waves = waves;
+	}
+
 }

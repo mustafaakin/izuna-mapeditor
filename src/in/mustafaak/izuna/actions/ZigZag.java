@@ -4,9 +4,9 @@ import in.mustafaak.izuna.meta.WavePath;
 
 import java.util.ArrayList;
 
-public class SingleZigZag extends Action {
+public class ZigZag extends Action {
 
-	public SingleZigZag(int w, int h, boolean toRight, int duration){
+	public ZigZag(int w, int h, boolean toRight, int duration){
 		if (toRight) {
 			Move up = new Move(w/2, -h/2, duration);
 			Move down = new Move(w/2, h/2, duration);			

@@ -16,7 +16,7 @@ import org.simpleframework.xml.Root;
 public class WaveInfo {
 
 	@ElementList
-	private List<WaveEnemy> Enemies;
+	private List<WaveEnemy> Enemies = new ArrayList<WaveEnemy>();
 
 	/**
 	 * 
